@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#curl -Lo speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+#chmod +x speedtest-cli
+
+
 echo "###############################################################"
 echo "Check that we have the speedtest cli utility"
 if [[ ! -f speedtest-cli ]]
@@ -41,14 +45,15 @@ python3 speedtest_parser.py ${temp_file} ${thedate} ${thetime} > ${data_name}
 echo "---------------------------------------------------------------"
 cat ${data_name}
 
+
 echo "###############################################################"
-export PGHOST=192.168.72.140
+echo "Loading to Database"
+echo "###############################################################"
+export PGHOST=192.168.1.77
 export PGPORT=5432
 export PGDATABASE=internetstats
-export PGUSER=postgres
+export PGUSER=statsuser
 export PGPASSWORD=password
-
-echo "Loading to Database"
 
 #CREATE DATABASE internetstats;
 #CREATE TABLE speedtest (speedtestdate INTEGER NOT NULL, speedtestime INTEGER NOT NULL, servername CHARACTER VARYING(256) NOT NULL, pingms NUMERIC(16,4), download numeric(16,4), upload numeric(16,4));
